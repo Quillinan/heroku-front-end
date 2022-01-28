@@ -38,6 +38,18 @@ const Info: React.FC = () => {
     return moment(date).format('DD/MM/YYYY');
   }
 
+  // Formatação do preço
+  function formatePrice(price: number | undefined) {
+    if (price) {
+      return price.toLocaleString('pt-br', {
+        style: 'currency',
+        currency: 'BRL',
+      });
+    } else {
+      return 'R$0,00';
+    }
+  }
+
   return (
     <div className="text-center">
       <br />
@@ -48,7 +60,7 @@ const Info: React.FC = () => {
         <Card.Body>
           <Card.Title>{produto?.name}</Card.Title>
           <Card.Text>
-            R${produto?.price},00
+            {formatePrice(produto?.price)}
             <br />
             <strong>Data de Cadastro: </strong>
             <Badge bg="primary">{formateDate(produto?.created_at)}</Badge>
